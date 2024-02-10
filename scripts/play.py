@@ -30,7 +30,7 @@ def load_policy(logdir):
 
 
 def load_env(label, headless=False):
-    dirs = glob.glob(f"../runs/{label}/*")
+    dirs = glob.glob(f"runs/{label}")
     logdir = sorted(dirs)[0]
 
     with open(logdir + "/parameters.pkl", 'rb') as file:
@@ -94,7 +94,8 @@ def play_go1(headless=True):
     import glob
     import os
 
-    label = "gait-conditioned-agility/pretrain-v0/train"
+    # label = "gait-conditioned-agility/pretrain-v0/train"
+    label = "gait-conditioned-agility/2024-02-08/train/202323.459998"
 
     env, policy = load_env(label, headless=headless)
 

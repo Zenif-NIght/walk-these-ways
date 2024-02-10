@@ -1,4 +1,7 @@
-runs
+runs/
+logs/
+temp/
+
 # Jaynes secret files
 .secret*
 # ml_logger cache files

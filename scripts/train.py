@@ -18,6 +18,7 @@ def train_go1(headless=True):
 
     config_go1(Cfg)
 
+    # Cfg.env.num_envs = 400
     Cfg.commands.num_lin_vel_bins = 30
     Cfg.commands.num_ang_vel_bins = 30
     Cfg.curriculum_thresholds.tracking_ang_vel = 0.7
@@ -77,7 +78,7 @@ def train_go1(headless=True):
 
     Cfg.env.num_privileged_obs = 2
     Cfg.env.num_observation_history = 30
-    Cfg.reward_scales.feet_contact_forces = 0.0
+    Cfg.reward_scales.feet_contact_forces = 0.90
 
     Cfg.domain_rand.rand_interval_s = 4
     Cfg.commands.num_commands = 15
@@ -143,7 +144,7 @@ def train_go1(headless=True):
     Cfg.reward_scales.tracking_contacts_shaped_vel = 4.0
     Cfg.reward_scales.collision = -5.0
 
-    Cfg.rewards.reward_container_name = "CoRLRewards"
+    Cfg.rewards.reward_container_name = "SOFT_Rewards"
     Cfg.rewards.only_positive_rewards = False
     Cfg.rewards.only_positive_rewards_ji22_style = True
     Cfg.rewards.sigma_rew_neg = 0.02
@@ -204,7 +205,7 @@ def train_go1(headless=True):
     Cfg.commands.binary_phases = True
     Cfg.commands.gaitwise_curricula = True
 
-    env = VelocityTrackingEasyEnv(sim_device='cuda:0', headless=False, cfg=Cfg)
+    env = VelocityTrackingEasyEnv(sim_device='cuda:0', headless=headless, cfg=Cfg)
 
     # log the experiment parameters
     logger.log_params(AC_Args=vars(AC_Args), PPO_Args=vars(PPO_Args), RunnerArgs=vars(RunnerArgs),
@@ -253,4 +254,4 @@ if __name__ == '__main__':
                 """, filename=".charts.yml", dedent=True)
 
     # to see the environment rendering, set headless=False
-    train_go1(headless=False)
+    train_go1(headless=True)
